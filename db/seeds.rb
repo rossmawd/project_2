@@ -5,3 +5,46 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require "faker"
+
+User.destroy_all
+Project.destroy_all
+Task.destroy_all
+Tag.destroy_all
+TaskTag.destroy_all
+
+3.times do
+  User.create(
+    name: Faker::TvShows::RickAndMorty.unique.character,
+    user_name: Faker::GreekPhilosophers.unique.name,
+    password: "123",
+  )
+end
+
+5.times do
+  Project.create(
+    name: "#{Faker::Verb.base} #{Faker::Educator.unique.subject}",
+  )
+end
+
+20.times do
+  Task.create(
+    name: "Now the #{Faker::Marketing.buzzwords}",
+    user_id: User.all.sample.id,
+    project_id: Project.all.sample.id,
+    archive: false,
+  )
+end
+
+Tag.create(name: "@email")
+Tag.create(name: "@online")
+Tag.create(name: "@phone")
+Tag.create(name: "@work")
+Tag.create(name: "@Doug")
+
+50.times do
+  TaskTag.create(
+    tag_id: Tag.all.sample.id,
+    task_id: Task.all.sample.id,
+  )
+end
