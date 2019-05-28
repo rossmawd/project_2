@@ -21,16 +21,17 @@ TaskTag.destroy_all
   )
 end
 
-5.times do
+10.times do
   Project.create(
     name: "#{Faker::Verb.base} #{Faker::Educator.unique.subject}",
+    user_id: User.all.sample.id,
+    description: Faker::Movies::HitchhikersGuideToTheGalaxy.unique.quote,
   )
 end
 
-20.times do
+30.times do
   Task.create(
-    name: "Now the #{Faker::Marketing.buzzwords}",
-    user_id: User.all.sample.id,
+    name: Faker::Marketing.buzzwords,
     project_id: Project.all.sample.id,
     archive: false,
   )
