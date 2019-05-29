@@ -1,7 +1,9 @@
-<h1>Task: <%=@task.name.capitalize  %></h1>
+<h1>Task: <%=@task.name.capitalize%> 
+(Project: <%=link_to(@task.project.name.capitalize, project_path(@task.project))%>)</h1>
 
 <% if @task.tags == [] %>
   <h3>This Task has no Tags!</h3>
+  <%= link_to 'Edit this task', edit_task_path(@task) %>
 <% else %>
   <h3>Tags:</h3>
   <ul>
@@ -9,4 +11,6 @@
   <li><%= link_to( tag.name, tag_path(tag)) %></li>
   <% end %>
   </ul>
+  <h3>Status: <%= @task.complete ? "Complete" : "In progress" %></h3>
+  <%= link_to 'Edit this task', edit_task_path(@task) %>
 <% end %>

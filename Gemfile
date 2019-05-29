@@ -38,6 +38,10 @@ gem 'faker'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
+# BOOTSTRAP: https://www.freecodecamp.org/news/add-bootstrap-to-your-ruby-on-rails-project-8d76d70d0e3b/#f724
+gem 'bootstrap'
+gem 'jquery-rails'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
