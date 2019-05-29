@@ -3,15 +3,20 @@
 <h3>Description: </h3>
 <p><%= @project.description %></p>
 <h3>Tasks: </h3>
+<% #byebug %>
+<button><%= link_to("Add Tasks", new_task_path(:project_id => @project.id )) %>
+</button>
 <ol>
 <% @project.tasks.each do |task| %>
 
     <li><h4><%= link_to(task.name, task_path(task)) %>
     <% if task.complete == true  %>
   Completed!
+ 
     <% end %>
     </h4>
     <p>Tags:
+    
     <% task.tags.each do |tag|  %>
         <%= link_to(tag.name, tag_path(tag)) %>
     <% end %>

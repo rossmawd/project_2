@@ -2,15 +2,25 @@
 (Project: <%=link_to(@task.project.name.capitalize, project_path(@task.project))%>)</h1>
 
 <% if @task.tags == [] %>
-  <h3>This Task has no Tags!</h3>
-  <%= link_to 'Edit this task', edit_task_path(@task) %>
+    <h3>This Task has no Tags!</h3>
+    <%= link_to 'Edit this task', edit_task_path(@task) %>
+    <%= form_tag @task, method: "delete", class: 'delete_btn' do %>
+        <%= submit_tag "Delete Task" %>
+        <% end %>
 <% else %>
   <h3>Tags:</h3>
+
   <ul>
   <% @task.tags.each do |tag| %>
   <li><%= link_to( tag.name, tag_path(tag)) %></li>
   <% end %>
   </ul>
+
   <h3>Status: <%= @task.complete ? "Complete" : "In progress" %></h3>
   <%= link_to 'Edit this task', edit_task_path(@task) %>
+   
+   <%= form_tag @task, method: "delete", class: 'delete_btn' do %>
+        <%= submit_tag "Delete Task" %>
+   <% end %>
+   
 <% end %>

@@ -1,9 +1,9 @@
-<h1>All Tasks Associated with  <%= @tag.name %></h1>
+<h1>All Tasks you can do while "<%= @tag.name %>"</h1>
 
 <ul>
 
 <% @tag.tasks.order(:name).each do |task| %>
-<li><%= link_to(task.name, task_path(task)) %> 
+<li>Task: <%= link_to(task.name, task_path(task)) %> <br>
 (Project: <%= link_to(task.project.name.capitalize, project_path(task.project)) %>) </li>
 <% end %>
 </ul>
