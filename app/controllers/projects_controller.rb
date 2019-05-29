@@ -9,6 +9,22 @@ class ProjectsController < ApplicationController
   def show
   end
 
+  def new
+    @project = Project.new
+  end
+
+  def create
+    project = Project.create(project_params)
+    project.user = User.all.sample # current_user
+
+    if project.save
+      redirect_to project_path(project)
+    else
+      redirect_to new_project_path
+      flash[:errors] = project.errors.full_messages
+    end
+
+  end
 
 
   private
@@ -18,7 +34,7 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit(:name, :archive, :user_id, :inbox )
+    params.require(:project).permit(:name, :description )
   end
 
 
