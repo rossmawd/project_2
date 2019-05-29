@@ -7,12 +7,34 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <% #https://getbootstrap.com/docs/4.3/getting-started/introduction/ %>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+     
   </head>
+
+<% #https://cdnjs.cloudflare.com/ajax/libs/milligram/1.3.0/milligram.css %>
 
   <body>
   <%= link_to("All Projects |", projects_path) %>   
   <%= link_to("All Tags |", tags_path) %>   
+  <%= link_to("New Task |", new_task_path) %>   
+  <%= link_to("New Project |", new_project_path) %>   
  
+ <% if flash[:errors] %>
+    <% if flash[:errors].class == Array %>
+          <ul>
+      
+          <% flash[:errors].each do |error| %>
+              <li><%= error %></li>
+          <% end %>
+          </ul>
+          
+    <% else %>
+       <%= flash[:errors] %>
+    <% end %>
+<% end %>
+
     <%= yield %>
+
   </body>
 </html>

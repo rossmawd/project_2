@@ -1,11 +1,48 @@
 class TasksController < ApplicationController
-  #CRUD controller actions to go here
-  before_action :set_task, only: [:show]
+  # CRUD controller actions to go here
+  before_action :set_task, only: [:show, :edit, :update]
+  
 
   def show
   end
 
+  def new
+    @task = Task.new
+  end
 
+  def create
+    @task = Task.new(task_params)
+    if @task.valid?
+      @task.save
+     
+      @task.create_task_tags(params['tag']['id'])
+      redirect_to task_path(@task)
+    else
+      #flash[:errors] = @task.errors.messages[:name]
+      flash[:errors] = @task.errors.full_messages
+      redirect_to new_task_path
+    end
+  end
+
+  def edit
+  end
+
+  def update
+   #byebug
+    @task.update(task_params)
+    if @task.valid?
+      @task.update_task_tags(params['tag']['id'])
+      #byebug
+      @task.update(complete: params["task"]["complete"] )
+      redirect_to @task
+    else
+      flash[:errors] = @task.errors.full_messages
+      flash[:notice] = "Hello, I am a task"
+      redirect_to edit_task_path
+    end
+  end
+
+  
   private
 
   def set_task
@@ -14,5 +51,7 @@ class TasksController < ApplicationController
 
   def task_params
     params.require(:task).permit(:name, :archive, :project_id)
+    # The permit method returns a copy of the parameters object, returning only the permitted keys and values.
+    # The require method ensures that a specific parameter is present, and if it's not provided, the require method throws an error.
   end
 end

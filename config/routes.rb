@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   resources :task_tags, only: [:index, :show] # Does this need any routes?
   resources :tags, only: [:index, :show]
   resources :users, only: [:index, :show]
-  resources :tasks, only: [:index, :show]
-  resources :projects, only: [:index, :show]
+  resources :tasks, only: [:index, :show, :new, :create, :edit, :update]
+  resources :projects, only: [:index, :show, :new, :create]
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
