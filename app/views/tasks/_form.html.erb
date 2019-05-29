@@ -4,8 +4,13 @@
   <%= f.label "Name: " %>
   <%= f.text_field :name %>
 
+<% if params[:project_id] %>
+ <%= hidden_field_tag 'task[project_id]', params[:project_id] %>
+ <% else %>
   <%= f.label "Project: " %>   
   <%= f.collection_select :project_id, Project.all, :id, :name %>
+ <% end %>
+
   <br>
   <%= f.label "Tags: " %>   
   <%= collection_check_boxes(:tag, :id, Tag.all, :id, :name, { checked: @task.tags.map(&:to_param) }) %>
