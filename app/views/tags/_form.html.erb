@@ -3,5 +3,11 @@
   <%= f.text_field :name %>
   <%= f.submit %>
   <% end %>
+  
+<br>
 
-  <h5>List off current tags?</h5>
+<h3>Current Tags:</h3>
+  <% Tag.all.each do |tag| %>
+  <%= tag.name %>
+  <br>
+  <% end %>
