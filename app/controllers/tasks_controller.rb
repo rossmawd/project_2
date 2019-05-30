@@ -33,8 +33,8 @@ class TasksController < ApplicationController
    
     @task.update(task_params)
     if @task.valid?
-      @task.update_task_tags(params['tag']['id'])
      
+      @task.update_task_tags(params['tag']['id']) 
       @task.update(complete: params["task"]["complete"] )
       redirect_to @task
     else

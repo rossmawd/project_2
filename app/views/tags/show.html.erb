@@ -1,5 +1,11 @@
-<h1>All Tasks you can do while "<%= @tag.name %>"</h1>
+<h1>All the Tasks you can do "<%= @tag.name %>"</h1>
+<button><%= link_to "Edit this tags name", edit_tag_path(@tag) %>  </button>
 
+  <%= form_tag @tag, method: "delete", class: 'delete_btn' do %>
+      <%= submit_tag "Delete Tag" %>
+      <% end %>
+
+<br><br>
 <ul>
 
 <% @tag.tasks.order(:name).each do |task| %>

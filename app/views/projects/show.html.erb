@@ -1,27 +1,46 @@
-<h1> Project: <%= @project.name.capitalize %></h1>
+<h1> Project: <%= @project.name.capitalize %></h1> 
+
+<%= form_for @project do |f| %>
+<h4><%= f.label "Completed this Project?: " %> 
+<%= f.check_box :complete, { checked: @project.complete }%> <br> </h4>
+<%= f.submit("Update Status", id: 'submit') %>
+<% end %>
+
 
 <h3>Description: </h3>
 <p><%= @project.description %></p>
+
 <h3>Tasks: </h3>
-<% #byebug %>
+
 <button><%= link_to("Add Tasks", new_task_path(:project_id => @project.id )) %>
-</button>
+</button> 
+<br> <br>
+
 <ol>
 <% @project.tasks.each do |task| %>
 
-    <li><h4><%= link_to(task.name, task_path(task)) %>
+    <li><h4><%= link_to(task.name, task_path(task)) %> <br> </h4>  
+    <h6>
     <% if task.complete == true  %>
-  Completed!
- 
+  Status: Completed!
+  <% else %>
+  Status: In Progress...
     <% end %>
-    </h4>
-    <p>Tags:
-    
+</h6>
+
+
+    <p>
+    Tags: 
     <% task.tags.each do |tag|  %>
         <%= link_to(tag.name, tag_path(tag)) %>
     <% end %>
     </p>
+    <button><%= link_to "Edit this task", edit_task_path(task) %></button>
     </li>
+    <br>
+
 
 <% end %>
 </ol>
+
+<button><%= link_to "Delete Project", confirm_path %>  </button>

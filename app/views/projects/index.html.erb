@@ -3,7 +3,8 @@
 <ol>
 <% @projects.each do |project|  %>
 <li>
-<h3><%= link_to(project.name.capitalize, project_path(project)) %>.</h3>
+<h3><%= link_to(project.name.capitalize, project_path(project)) %>:
+ <%= project.complete ? "Complete" : "In Progress" %></h3>
 <ul>
 <li> Archived?: <%= project.archive %></li>
 <% length = Task.all.select { |task| task.project_id == project.id }.length %>
