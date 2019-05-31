@@ -19,18 +19,21 @@
   <%= link_to("All Tags |", tags_path) %>   
   <%= link_to("New Task |", new_task_path) %>   
   <%= link_to("New Project |", new_project_path) %>   
- 
+  <%= link_to("New Tag |", new_tag_path) %>   
+ <br><br>
  <% if flash[:errors] %>
     <% if flash[:errors].class == Array %>
           <ul>
       
           <% flash[:errors].each do |error| %>
-              <li><%= error %></li>
+              <li><h3><%= error %></h3></li>
           <% end %>
           </ul>
+          <br>
           
     <% else %>
-       <%= flash[:errors] %>
+       <h3><%= flash[:errors] %></h3>
+       <br>
     <% end %>
 <% end %>
 

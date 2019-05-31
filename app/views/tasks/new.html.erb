@@ -1,5 +1,8 @@
+<% if params[:project_id] %>
+<h1>What's the next thing you can do to: "<%= Project.find(params[:project_id]).name %>"</h1>
+<% else %>
 <h1>Lets make a New Task!</h1>
-
+<% end %>
 <%= link_to "cancel", projects_path %>
 
 <%= render 'form' %>

@@ -1,0 +1,13 @@
+<%= form_for @tag do |f| %>
+  <%= f.label "Name: " %>
+  <%= f.text_field :name %>
+  <%= f.submit %>
+  <% end %>
+  
+<br>
+
+<h3>Current Tags:</h3>
+  <% Tag.all.each do |tag| %>
+  <%= tag.name %>
+  <br>
+  <% end %>

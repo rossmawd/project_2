@@ -4,15 +4,21 @@
   <%= f.label "Name: " %>
   <%= f.text_field :name %>
 
+<% if params[:project_id] %>
+ <%= hidden_field_tag 'task[project_id]', params[:project_id] %>
+ <% else %>
   <%= f.label "Project: " %>   
   <%= f.collection_select :project_id, Project.all, :id, :name %>
+ <% end %>
+
   <br>
   <%= f.label "Tags: " %>   
-  <%= collection_check_boxes(:tag, :id, Tag.all, :id, :name, { checked: @task.tags.map(&:to_param) }) %>
+  <p><%= collection_check_boxes(:tag, :id, Tag.all, :id, :name, { checked: @task.tags.map(&:to_param) }) %>
+  </p>
   <% # key for params; nested? key for params; collection; method to call on collection; what to display next to boxes %>
    
-   <h4><%= f.label "Completed this task?: " %> </h4>
-   <%= f.check_box :complete %> <br>
+   <h4><%= f.label "Completed this task?: " %> <%= f.check_box :complete %> <br> </h4>
+   
    <br>
    <% #I want to add cutom display "complete"/"in progress" next to this box %>
   

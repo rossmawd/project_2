@@ -1,0 +1,8 @@
+<h2>Are you <b>sure</b> you want to delete the project: </h2>
+ <h2>"<%= @project.name %>"?</h2>
+
+ <button><%= link_to "No! Cancel", project_path(@project) %>  </button>
+
+ <%= form_tag @project, method: "delete", class: 'delete_btn' do %>
+      <%= submit_tag "Yes, Delete it!" %>
+      <% end %>
