@@ -5,9 +5,12 @@
       <%= submit_tag "Delete Tag" %>
       <% end %>
 
-<br><br>
-<ul>
 
+<%= link_to "Sort by Project", projects_path%>|
+<%= link_to "Sort by Name", projects_path(sort: "by_outstanding")%>
+<br><br>
+
+<ul>
 <% @tag.tasks.order(:name).each do |task| %>
 <li>Task: <%= link_to(task.name, task_path(task)) %> <br>
 (Project: <%= link_to(task.project.name.capitalize, project_path(task.project)) %>) </li>

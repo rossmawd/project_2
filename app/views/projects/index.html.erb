@@ -1,14 +1,17 @@
 <h1>All Projects!</h1>
-
+<%= link_to "Sort by User", user_sort_path%>|
+<%= link_to "Sort by User2",  projects_path(sort: "by_user")%>|
+<%= link_to "Sort by Project Name", projects_path%>|
+<%= link_to "Sort by Outanding Tasks", projects_path(sort: "by_outstanding")%>|
 <ol>
+
 <% @projects.each do |project|  %>
 <li>
 <h3><%= link_to(project.name.capitalize, project_path(project)) %>:
  <%= project.complete ? "Complete" : "In Progress" %></h3>
 <ul>
 <li> Archived?: <%= project.archive %></li>
-<% length = Task.all.select { |task| task.project_id == project.id }.length %>
-<li>Number of tasks: <%= length  %></li>
+<li>Outstanding / Total Tasks: <%= project.incomplete_tasks_count %>/ <%= project.task_count  %></li>
 <li>User:  <%= project.user.name %>  </li>
 </ul>
 </li>

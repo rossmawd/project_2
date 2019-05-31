@@ -5,7 +5,20 @@ class ProjectsController < ApplicationController
   # CRUD controller actions to go here
 
   def index
+    if params["sort"]# == "outstanding" #this doesn't break when params["sort"] == nil
+     
+      
+      @projects = Project.sorted(params["sort"])
+    else
+    
     @projects = Project.order(:name)
+   
+    end
+  end
+
+  def user_sort
+    @projects = Project.all.sort_by{|project| project.user.name}
+    render :index # renders the index page WITHOUT running the index controller action
   end
 
   def show; end
@@ -16,7 +29,10 @@ class ProjectsController < ApplicationController
 
   def create
     project = Project.create(project_params)
-    project.user = User.all.sample # current_user
+    
+    project.update( name: project.name.capitalize)
+    
+    #project.user = User.all.sample # current_user to be implemented
 
     if project.save
       redirect_to project_path(project)
@@ -59,6 +75,6 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit(:name, :description, :complete)
+    params.require(:project).permit(:user_id, :name, :description, :complete)
   end
 end
