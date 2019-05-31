@@ -12,9 +12,9 @@ class Task < ApplicationRecord
   def self.sorted(sort_method, tag)
     case sort_method 
       when "by_project"
-        tag.tasks.sort_by{ |task| task.project }.reverse
+        tag.tasks.sort_by{ |task| task.project.name }
       when "by_time"
-        tag.tasks.sort_by{ |task| task.project }.reverse
+        tag.tasks.sort_by{ |task| task.time }
       when "by_name"
         tag.tasks.order(:name)  
     end

@@ -26,7 +26,7 @@ class ProjectsController < ApplicationController
   def create
     project = Project.create(project_params)
     
-    project.update( name: project.name.capitalize)
+    project.update( name: project.name.downcase)
     
     #project.user = User.all.sample # current_user to be implemented
 
@@ -62,7 +62,12 @@ class ProjectsController < ApplicationController
     redirect_to projects_path
   end
 
-  def confirm; end
+  def confirm
+    if @project.inbox == true
+      flash[:errors] = "You can't delete your Inbox!"
+      redirect_to project_path(@project)
+    end
+  end
 
   private
 

@@ -13,6 +13,7 @@ class TasksController < ApplicationController
   end
 
   def create
+  
     @task = Task.new(task_params)
     if @task.valid?
       @task.save
@@ -60,7 +61,7 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:name, :archive, :project_id)
+    params.require(:task).permit(:name, :archive, :project_id, :time)
     # The permit method returns a copy of the parameters object, returning only the permitted keys and values.
     # The require method ensures that a specific parameter is present, and if it's not provided, the require method throws an error.
   end

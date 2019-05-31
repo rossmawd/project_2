@@ -17,7 +17,10 @@
   <% end %>
   </ul>
 
-  <h3>Status: <%= @task.complete ? "Complete" : "In progress" %></h3>
+  <h5>Status: <%= @task.complete ? "Complete" : "In progress" %></h5>
+  <h5>Estimated time for Task: </h5>
+  <p><%= @task.time %>-ish minutes (or less)</p> 
+  <br>
   <button><%= link_to 'Edit this task', edit_task_path(@task) %></button>
   <br>
    <p>

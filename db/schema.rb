@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_28_134143) do
+ActiveRecord::Schema.define(version: 2019_05_31_110749) do
 
   create_table "projects", force: :cascade do |t|
     t.string "name"
@@ -41,12 +41,13 @@ ActiveRecord::Schema.define(version: 2019_05_28_134143) do
     t.datetime "updated_at", null: false
     t.integer "project_id"
     t.boolean "complete", default: false
+    t.integer "time"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
-    t.string "user_name"
-    t.string "password"
+    t.string "user_name", default: "123"
+    t.string "password", default: "123"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

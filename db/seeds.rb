@@ -23,7 +23,7 @@ end
 
 10.times do
   Project.create(
-    name: "#{Faker::Verb.base} #{Faker::Educator.unique.subject}",
+    name: "#{Faker::Verb.base.downcase} #{Faker::Educator.unique.subject.downcase}",
     user_id: User.all.sample.id,
     description: Faker::Movies::HitchhikersGuideToTheGalaxy.unique.quote,
   )
@@ -31,9 +31,10 @@ end
 
 30.times do
   Task.create(
-    name: Faker::Marketing.buzzwords,
+    name: Faker::Marketing.buzzwords.downcase,
     project_id: Project.all.sample.id,
     archive: false,
+    time: [5,10,30,60].sample
   )
 end
 

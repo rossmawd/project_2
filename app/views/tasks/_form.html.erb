@@ -1,6 +1,6 @@
 
-
-<%= form_for @task do |f| %>
+<p>Tasks should be as small and 'actionable' as possible...if it takes longer than 60 minutes you shold probably split it up! </p>
+<%= form_for @task do |f| %> <br>
   <%= f.label "Name: " %>
   <%= f.text_field :name %>
 
@@ -8,8 +8,12 @@
  <%= hidden_field_tag 'task[project_id]', params[:project_id] %>
  <% else %>
   <%= f.label "Project: " %>   
-  <%= f.collection_select :project_id, Project.all, :id, :name %>
+  <% inbox = Project.find_by(inbox: true) #User: current %>
+  <%= f.collection_select :project_id, Project.all, :id, :name, {:selected => inbox.id } %>
  <% end %>
+
+ <%= f.label "Estimated task time (mins): " %>   
+  <%= f.collection_select :time, [5,10,30,60], :to_i, :to_i %> <b>...or less</b>
 
   <br>
   <%= f.label "Tags: " %>   

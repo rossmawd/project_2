@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   #COPIED from another class TO CHECK
 
-  before_action :set_user, only: %i[show edit update destroy confirm] # , unless: -> { @foo.nil? }
+  before_action :set_user, only: %i[show edit update destroy confirm]
   # CRUD controller actions to go here
 
   def index
@@ -21,7 +21,9 @@ class UsersController < ApplicationController
     #user.user = User.all.sample # current_user
 
     if user.valid?
-      redirect_to user_path(user)
+      Project.create(name: "Inbox", user_id: user.id, inbox: true, description: "Your Inbox is where you can put tasks that don't (yet) have a Project" )
+      redirect_to projects_path#user_path(user)  
+      flash[:errors] = "Welcome #{user.name}! use the links above to get started..."
     else
       redirect_to new_user_path
       flash[:errors] = user.errors.full_messages
@@ -31,7 +33,8 @@ class UsersController < ApplicationController
   private
 
   def set_user
-    @user = user.find(params['id'])
+   # byebug
+    @user = User.find(params['id'])
   end
 
   def user_params

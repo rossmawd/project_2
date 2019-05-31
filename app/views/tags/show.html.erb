@@ -11,11 +11,15 @@
 <br><br>
 </p>
 
-<ul>   
+<table>   
 
 <% @tag_tasks.each do |task| %>
-<li>Task: <%= link_to(task.name, task_path(task)) %>
-Project: <%= link_to(task.project.name.capitalize, project_path(task.project)) %> </li>
+<li>Task: <%= link_to(task.name.capitalize, task_path(task)) %> <br>
+<ul>
+<li>  Estimated Time: <%= task.time %> </li> 
+<li>(Project: <%= link_to(task.project.name.capitalize, project_path(task.project)) %>)</li>
+</ul>
+</li>
 <% end %>
 
-</ul>
+</table>
