@@ -1,11 +1,17 @@
 class TagsController < ApplicationController
   before_action :set_tag, only: [:show, :edit, :update, :destroy]
 
-def index
+def index     
   @tags = Tag.order(:name)
 end
 
 def show
+  if params["sort"]# == "outstanding" #this doesn't break when params["sort"] == nil     
+    @tag_tasks = Task.sorted(params["sort"], @tag)
+  else
+    @tag_tasks = @tag.tasks
+  end
+
 end
 
 def new

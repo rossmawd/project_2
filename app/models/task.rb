@@ -9,7 +9,19 @@ class Task < ApplicationRecord
     message: ": this project already has a task with that name!" }
 
 
-   def create_task_tags(tag_ids)
+  def self.sorted(sort_method, tag)
+    case sort_method 
+      when "by_project"
+        tag.tasks.sort_by{ |task| task.project }.reverse
+      when "by_time"
+        tag.tasks.sort_by{ |task| task.project }.reverse
+      when "by_name"
+        tag.tasks.order(:name)  
+    end
+  end
+
+
+  def create_task_tags(tag_ids)
     tag_ids.each do |id|
       TaskTag.create(tag_id: id, task_id: self.id)
     end

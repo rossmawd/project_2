@@ -5,14 +5,10 @@ class ProjectsController < ApplicationController
   # CRUD controller actions to go here
 
   def index
-    if params["sort"]# == "outstanding" #this doesn't break when params["sort"] == nil
-     
-      
+    if params["sort"]# == "outstanding" #this doesn't break when params["sort"] == nil     
       @projects = Project.sorted(params["sort"])
-    else
-    
-    @projects = Project.order(:name)
-   
+    else 
+      @projects = Project.order(:name)
     end
   end
 

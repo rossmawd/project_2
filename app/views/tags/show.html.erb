@@ -4,15 +4,18 @@
   <%= form_tag @tag, method: "delete", class: 'delete_btn' do %>
       <%= submit_tag "Delete Tag" %>
       <% end %>
-
-
-<%= link_to "Sort by Project", projects_path%>|
-<%= link_to "Sort by Name", projects_path(sort: "by_outstanding")%>
+<p>
+<%= link_to "Sort by Project", tag_path(sort: "by_project")%>|
+<%= link_to "Sort by Estimated Task Time", tag_path(sort: "by_time")%>|
+<%= link_to "Sort by Name", tag_path(sort: "by_name")%>
 <br><br>
+</p>
 
-<ul>
-<% @tag.tasks.order(:name).each do |task| %>
-<li>Task: <%= link_to(task.name, task_path(task)) %> <br>
-(Project: <%= link_to(task.project.name.capitalize, project_path(task.project)) %>) </li>
+<ul>   
+
+<% @tag_tasks.each do |task| %>
+<li>Task: <%= link_to(task.name, task_path(task)) %>
+Project: <%= link_to(task.project.name.capitalize, project_path(task.project)) %> </li>
 <% end %>
+
 </ul>

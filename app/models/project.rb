@@ -8,12 +8,11 @@ class Project < ApplicationRecord
 
   def self.sorted(sort_method)
    
-    case sort_method
-     
-    when "by_outstanding"
-      self.all.sort_by{ |project| project.incomplete_tasks_count}.reverse
-    when "by_user"
-      self.all.sort_by{|project| project.user.name}
+    case sort_method 
+      when "by_outstanding"
+        self.all.sort_by{ |project| project.incomplete_tasks_count}.reverse
+      when "by_user"
+        self.all.sort_by{|project| project.user.name}
     end
 
   end
