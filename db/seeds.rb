@@ -16,7 +16,7 @@ TaskTag.destroy_all
 3.times do
   User.create(
     name: Faker::TvShows::RickAndMorty.unique.character,
-    user_name: Faker::GreekPhilosophers.unique.name,
+    username: Faker::GreekPhilosophers.unique.name,
     password: "123",
   )
 end

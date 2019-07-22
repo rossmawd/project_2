@@ -3,17 +3,22 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: %i[show edit update destroy confirm] # , unless: -> { @foo.nil? }
   # CRUD controller actions to go here
+  before_action :authorized?
 
   def index
-    if params["sort"]# == "outstanding" #this doesn't break when params["sort"] == nil     
+    
+    if params["sort"]# == "outstanding" #this doesn't break when params["sort"] == nil    
       @projects = Project.sorted(params["sort"])
+      @projects = @projects.select{|project| project.user == current_user}
     else 
       @projects = Project.order(:name)
+      @projects = @projects.select{|project| project.user == current_user}
     end
   end
 
   def user_sort
     @projects = Project.all.sort_by{|project| project.user.name}
+    @projects = @projects.select{|project| project.user == current_user}
     render :index # renders the index page WITHOUT running the index controller action
   end
 

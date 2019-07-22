@@ -7,7 +7,7 @@ class User < ApplicationRecord
   validates :name, presence: true, allow_blank: false
   validates :name, uniqueness: true
 
-  validates :user_name, uniqueness: true
+  validates :username, uniqueness: true
   has_secure_password  # Macro that gives you access to a few methods
   
 end

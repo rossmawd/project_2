@@ -11,6 +11,7 @@ class Project < ApplicationRecord
     case sort_method 
       when "by_outstanding"
         self.all.sort_by{ |project| project.incomplete_tasks_count}.reverse
+        # SOrting 7 million things! THIS SORTING should be done by AR queries!!
       when "by_user"
         self.all.sort_by{|project| project.user.name}
     end

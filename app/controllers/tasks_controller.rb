@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
   # CRUD controller actions to go here
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :authorized?
   
 
   def show
