@@ -4,7 +4,7 @@ class ProjectsController < ApplicationController
   before_action :set_project, only: %i[show edit update destroy confirm] # , unless: -> { @foo.nil? }
   # CRUD controller actions to go here
   before_action :authorized?
-
+#Test push to master
   def index
     
     if params["sort"]# == "outstanding" #this doesn't break when params["sort"] == nil    
